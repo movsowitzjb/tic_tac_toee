@@ -1,11 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Square from "./Square";
 import Restart from "./Restart";
 import calculateWinner from "./calculateWinner";
 import isBoardFull from "./isBoardFull";
 
+const arr = Array(9).fill(null);
+
 const Game = () => {
-  const [squares, setSquares] = useState(Array(9).fill(null));
+  const [squares, setSquares] = useState(arr);
   const [isNext, setIsNext] = useState(true);
   const nextSymbol = isNext ? "X" : "O";
   const winner = calculateWinner(squares);
