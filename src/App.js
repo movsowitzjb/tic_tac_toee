@@ -1,10 +1,10 @@
 import { Route, Switch, Redirect } from "react-router-dom";
 import Game from "./component/Game/Game";
-
+import { useState, useEffect } from "react";
 import Layout from "./component/layout/Layout";
-import Login from "./component/login/Login";
+import Login from "./component/Login/Login";
 
-function App() {
+const App = () => {
   return (
     <Layout>
       <Switch>
@@ -21,6 +21,6 @@ function App() {
       </Switch>
     </Layout>
   );
-}
+};
 
 export default App;
