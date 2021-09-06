@@ -2,7 +2,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import Game from "./component/Game/Game";
 
 import Layout from "./component/layout/Layout";
-import Login from "./component/Login/Login";
+import Login from "./component/login/Login";
 
 function App() {
   return (
