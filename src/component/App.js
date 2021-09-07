@@ -1,32 +1,24 @@
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import Game from "./Game/Game";
-
-import Layout from "./layout/Layout";
+import Dashboard from "../component/dashboard/Dashboard";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
+import ForgotPassword from "./forgotpassword/ForgotPassword";
 import Login from "./Login/Login";
 import Signup from "./signup/Signup";
+import UpdateProfile from "./dashboard/UpdateProfile";
 
 const App = () => {
   return (
     <AuthProvider>
-      <Layout>
-        <Switch>
-          <Route path="/" exact>
-            <Redirect to="/signup" />
-          </Route>
-          <Route path="/signup" exact>
-            <div className="w-100" style={{ maxWidth: "400px" }}>
-              <Signup />
-            </div>
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/game">
-            <Game />
-          </Route>
-        </Switch>
-      </Layout>
+      <Switch>
+        <PrivateRoute path="/" exact component={Dashboard} />
+        <PrivateRoute path="/update-profile" component={UpdateProfile} />
+        <PrivateRoute path="/game" component={Game} />
+        <Route path="/signup" component={Signup} />
+        <Route path="/login" component={Login} />
+        <Route path="/forgot-password" component={ForgotPassword} />
+      </Switch>
     </AuthProvider>
   );
 };

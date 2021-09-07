@@ -63,6 +63,7 @@ const Game = () => {
         </div>
         <div className="game-info">{getStatus()}</div>
         <div className="restart-button">{renderRestartButton()}</div>
+        <div><Link to=</div>
       </div>
     </div>
   );

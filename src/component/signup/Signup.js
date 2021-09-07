@@ -1,21 +1,32 @@
-import React, { useRef } from "react";
-import { Card, Button, Form } from "react-bootstrap";
+import React, { useRef, useState } from "react";
+import { Card, Button, Form, Alert } from "react-bootstrap";
 import { useAuth } from "../context/AuthContext";
+import { Link, useHistory } from "react-router-dom";
 
 const Signup = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
   const { signup } = useAuth();
-  const [error,setError]
-
-  const handelSubmit = (e) => {
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const history = useHistory();
+  const handelSubmit = async (e) => {
     e.preventDefault();
 
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return;
+      return setError("Passwords do not match");
     }
-    signup(emailRef.current.value, passwordRef.current.value);
+    try {
+      setError("");
+
+      setLoading(true);
+      await signup(emailRef.current.value, passwordRef.current.value);
+      history.push("/");
+    } catch {
+      setError("Failed to create an account");
+    }
+    setLoading(false);
   };
 
   return (
@@ -23,7 +34,9 @@ const Signup = () => {
       <Card>
         <Card.Body>
           <h2 className="text-center mb-4">Sign Up</h2>
-          <Form>
+
+          {error && <Alert variant="danger">{error}</Alert>}
+          <Form onSubmit={handelSubmit}>
             <Form.Group id="email">
               <Form.Label>Email</Form.Label>
               <Form.Control type="email" required ref={emailRef} />
@@ -36,14 +49,14 @@ const Signup = () => {
               <Form.Label>Confirm Password</Form.Label>
               <Form.Control type="password" required ref={passwordConfirmRef} />
             </Form.Group>
-            <Button className="w-100 mb-4" type="submit">
+            <Button disabled={loading} className="w-100 " type="submit">
               Sign Up
             </Button>
           </Form>
         </Card.Body>
       </Card>
       <div className="w-100 text-center mt-2">
-        Already have an account? Sign in
+        Already have an account? <Link to="/login">Log In</Link>
       </div>
     </>
   );
