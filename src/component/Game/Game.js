@@ -3,14 +3,22 @@ import Square from "./Square";
 import Restart from "./Restart";
 import calculateWinner from "./calculateWinner";
 import isBoardFull from "./isBoardFull";
+import { Link } from "react-router-dom";
 
 const arr = Array(9).fill(null);
 
 const Game = () => {
   const [squares, setSquares] = useState(arr);
   const [isNext, setIsNext] = useState(true);
+
   const nextSymbol = isNext ? "X" : "O";
   const winner = calculateWinner(squares);
+
+  // useEffect(()=> {
+  //   if (winner) {
+  //     localStorage.setItem("winner"
+  //   }
+  // },[])
 
   const renderSquare = (i) => {
     const squareHandler = () => {
@@ -34,8 +42,10 @@ const Game = () => {
   };
   const getStatus = () => {
     if (winner) {
+      localStorage.setItem("winner:", winner);
       return "Winner:" + winner;
     } else if (isBoardFull(squares)) {
+      localStorage.setItem("draw:", isBoardFull(squares));
       return "Draw";
     } else {
       return "Next Player:" + nextSymbol;
@@ -63,7 +73,9 @@ const Game = () => {
         </div>
         <div className="game-info">{getStatus()}</div>
         <div className="restart-button">{renderRestartButton()}</div>
-        <div><Link to=</div>
+        <div className="w-100 text-center mt-2">
+          <Link to="/">Dashboard</Link>
+        </div>
       </div>
     </div>
   );

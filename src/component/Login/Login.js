@@ -11,7 +11,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 
-  const handelSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
@@ -30,24 +30,22 @@ const Login = () => {
       <Card>
         <Card.Body>
           <h2 className="text-center mb-4">Log In</h2>
-
           {error && <Alert variant="danger">{error}</Alert>}
-          <Form onSubmit={handelSubmit}>
+          <Form onSubmit={handleSubmit}>
             <Form.Group id="email">
               <Form.Label>Email</Form.Label>
-              <Form.Control type="email" required ref={emailRef} />
+              <Form.Control type="email" ref={emailRef} required />
             </Form.Group>
             <Form.Group id="password">
               <Form.Label>Password</Form.Label>
-              <Form.Control type="password" required ref={passwordRef} />
+              <Form.Control type="password" ref={passwordRef} required />
             </Form.Group>
-
-            <Button disabled={loading} className="w-100 " type="submit">
+            <Button disabled={loading} className="w-100" type="submit">
               Log In
             </Button>
           </Form>
           <div className="w-100 text-center mt-3">
-            <Link to="forgot-password">Forgot password</Link>
+            <Link to="/forgot-password">Forgot Password?</Link>
           </div>
         </Card.Body>
       </Card>
