@@ -42,10 +42,8 @@ const Game = () => {
   };
   const getStatus = () => {
     if (winner) {
-      localStorage.setItem("winner:", winner);
       return "Winner:" + winner;
     } else if (isBoardFull(squares)) {
-      localStorage.setItem("draw:", isBoardFull(squares));
       return "Draw";
     } else {
       return "Next Player:" + nextSymbol;
