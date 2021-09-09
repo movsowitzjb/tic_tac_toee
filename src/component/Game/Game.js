@@ -13,12 +13,6 @@ const Game = () => {
   const nextSymbol = isNext ? "X" : "O";
   const winner = calculateWinner(squares);
 
-  // useEffect(()=> {
-  //   if (winner) {
-  //     localStorage.setItem("winner"
-  //   }
-  // },[])
-
   const renderSquare = (i) => {
     const squareHandler = () => {
       if (squares[i] != null || winner != null) {
