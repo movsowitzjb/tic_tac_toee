@@ -10,7 +10,6 @@ const arr = Array(9).fill(null);
 const Game = () => {
   const [squares, setSquares] = useState(arr);
   const [isNext, setIsNext] = useState(true);
-
   const nextSymbol = isNext ? "X" : "O";
   const winner = calculateWinner(squares);
 
