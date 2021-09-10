@@ -1,27 +1,56 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Square from "./Square";
 import Restart from "./Restart";
 import calculateWinner from "./calculateWinner";
 import isBoardFull from "./isBoardFull";
 import { Link } from "react-router-dom";
 
-const arr = Array(9).fill(null);
-
 const Game = () => {
-  const [squares, setSquares] = useState(arr);
+  const [squares, setSquares] = useState(new Array(9).fill(null));
   const [isNext, setIsNext] = useState(true);
+  const [players, setPlayers] = useState({ human: "X", computer: "O" });
   const nextSymbol = isNext ? "X" : "O";
   const winner = calculateWinner(squares);
 
-  const renderSquare = (i) => {
-    const squareHandler = () => {
-      if (squares[i] != null || winner != null) {
-        return;
+  useEffect(
+    (i) => {
+      const isComputerTurn =
+        squares.filter((square) => square !== null).length % 2 === 1;
+      const emptyIndexes = squares
+        .map((square, index) => (square === null ? index : null))
+        .filter((val) => val !== null);
+
+      const putComputerAt = (i) => {
+        const nextSquares = squares.concat();
+        nextSquares[i] = players.computer;
+        setSquares(nextSquares);
+        setIsNext(!isNext);
+      };
+      if (isComputerTurn) {
+        if (squares[i] != null || winner != null) {
+          return;
+        }
+        setTimeout(() => {
+          const randomIndex =
+            emptyIndexes[Math.ceil(Math.random() * emptyIndexes.length)];
+
+          putComputerAt(randomIndex);
+        }, 1500);
       }
-      const nextSquares = squares.slice();
-      nextSquares[i] = nextSymbol;
-      setSquares(nextSquares);
-      setIsNext(!isNext);
+    },
+    [squares, winner, players, isNext]
+  );
+
+  const renderSquare = (i) => {
+    const isPlayerTurn =
+      squares.filter((square) => square !== null).length % 2 === 0;
+    const squareHandler = () => {
+      if (isPlayerTurn) {
+        const nextSquares = squares.concat();
+        nextSquares[i] = players.human;
+        setSquares(nextSquares);
+        setIsNext(!isNext);
+      }
     };
     return <Square value={squares[i]} onClick={squareHandler} />;
   };
@@ -29,7 +58,8 @@ const Game = () => {
   const renderRestartButton = () => {
     const restartHandler = () => {
       setSquares(Array(9).fill(null));
-      setIsNext(true);
+
+      setIsNext(!isNext);
     };
     return <Restart onClick={restartHandler} />;
   };
