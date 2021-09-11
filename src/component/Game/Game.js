@@ -77,8 +77,6 @@ const Game = () => {
     }
   }
 
-  localStorage.setItem('scores', JSON.stringify(xScore))
-
   return (
     <div className="container">
       <div className="game">
