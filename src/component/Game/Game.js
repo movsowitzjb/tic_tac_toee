@@ -9,9 +9,7 @@ const Game = () => {
   const [squares, setSquares] = useState(new Array(9).fill(null))
   const [isNext, setIsNext] = useState(true)
   const [players, setPlayers] = useState({ human: 'X', computer: 'O' })
-  const [xScore, setXScore] = []
-  const [oScore, setOScore] = []
-  const [draw, setDraw] = []
+
   const nextSymbol = isNext ? 'X' : 'O'
   const winner = calculateWinner(squares)
 
