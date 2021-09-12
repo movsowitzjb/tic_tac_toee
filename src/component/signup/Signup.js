@@ -1,33 +1,33 @@
-import React, { useRef, useState } from "react";
-import { Card, Button, Form, Alert } from "react-bootstrap";
-import { useAuth } from "../context/AuthContext";
-import { Link, useHistory } from "react-router-dom";
+import React, { useRef, useState } from 'react'
+import { Card, Button, Form, Alert } from 'react-bootstrap'
+import { useAuth } from '../context/AuthContext'
+import { Link, useHistory } from 'react-router-dom'
 
 const Signup = () => {
-  const emailRef = useRef();
-  const passwordRef = useRef();
-  const passwordConfirmRef = useRef();
-  const { signup } = useAuth();
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-  const history = useHistory();
+  const emailRef = useRef()
+  const passwordRef = useRef()
+  const passwordConfirmRef = useRef()
+  const { signup } = useAuth()
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
+  const history = useHistory()
   const handelSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Passwords do not match");
+      return setError('Passwords do not match')
     }
     try {
-      setError("");
+      setError('')
 
-      setLoading(true);
-      await signup(emailRef.current.value, passwordRef.current.value);
-      history.push("/");
+      setLoading(true)
+      await signup(emailRef.current.value, passwordRef.current.value)
+      history.push('/')
     } catch {
-      setError("Failed to create an account");
+      setError('Failed to create an account')
     }
-    setLoading(false);
-  };
+    setLoading(false)
+  }
 
   return (
     <>
@@ -49,7 +49,7 @@ const Signup = () => {
               <Form.Label>Confirm Password</Form.Label>
               <Form.Control type="password" required ref={passwordConfirmRef} />
             </Form.Group>
-            <Button disabled={loading} className="w-100 " type="submit">
+            <Button disabled={loading} className="w-100 mt-4" type="submit">
               Sign Up
             </Button>
           </Form>
@@ -59,7 +59,7 @@ const Signup = () => {
         Already have an account? <Link to="/login">Log In</Link>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Signup;
+export default Signup

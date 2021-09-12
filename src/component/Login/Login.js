@@ -1,29 +1,29 @@
-import React, { useRef, useState } from "react";
-import { Card, Button, Form, Alert } from "react-bootstrap";
-import { useAuth } from "../context/AuthContext";
-import { Link, useHistory } from "react-router-dom";
+import React, { useRef, useState } from 'react'
+import { Card, Button, Form, Alert } from 'react-bootstrap'
+import { useAuth } from '../context/AuthContext'
+import { Link, useHistory } from 'react-router-dom'
 
 const Login = () => {
-  const emailRef = useRef();
-  const passwordRef = useRef();
-  const { login } = useAuth();
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-  const history = useHistory();
+  const emailRef = useRef()
+  const passwordRef = useRef()
+  const { login } = useAuth()
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
+  const history = useHistory()
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     try {
-      setError("");
-      setLoading(true);
-      await login(emailRef.current.value, passwordRef.current.value);
-      history.push("/");
+      setError('')
+      setLoading(true)
+      await login(emailRef.current.value, passwordRef.current.value)
+      history.push('/')
     } catch {
-      setError("Failed to log in");
+      setError('Failed to log in')
     }
-    setLoading(false);
-  };
+    setLoading(false)
+  }
 
   return (
     <>
@@ -40,7 +40,7 @@ const Login = () => {
               <Form.Label>Password</Form.Label>
               <Form.Control type="password" ref={passwordRef} required />
             </Form.Group>
-            <Button disabled={loading} className="w-100" type="submit">
+            <Button disabled={loading} className="w-100 mt-4" type="submit">
               Log In
             </Button>
           </Form>
@@ -53,7 +53,7 @@ const Login = () => {
         Need an account? <Link to="/signup">Sign Up</Link>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

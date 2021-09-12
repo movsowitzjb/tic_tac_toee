@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import Square from './Square'
 import Restart from './Restart'
 import calculateWinner from './calculateWinner'
@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 const Game = () => {
   const [squares, setSquares] = useState(new Array(9).fill(null))
   const [isNext, setIsNext] = useState(true)
-  const [players, setPlayers] = useState({ human: 'X', computer: 'O' })
+  const players = useMemo(() => ({ human: 'X', computer: 'O' }), [])
 
   const nextSymbol = isNext ? 'X' : 'O'
   const winner = calculateWinner(squares)

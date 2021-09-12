@@ -8,15 +8,15 @@ const calculateWinner = (squares) => {
     [2, 5, 8],
     [0, 4, 8],
     [2, 4, 6],
-  ];
+  ]
 
   for (let i = 0; i < possibleLines.length; i++) {
-    const [a, b, c] = possibleLines[i];
+    const [a, b, c] = possibleLines[i]
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
+      return squares[a]
     }
   }
-  return null;
-};
+  return null
+}
 
-export default calculateWinner;
+export default calculateWinner
