@@ -33,7 +33,7 @@ const Game = () => {
         }
         setTimeout(() => {
           const randomIndex =
-            emptyIndexes[Math.ceil(Math.random() * emptyIndexes.length)]
+            emptyIndexes[Math.floor(Math.random() * emptyIndexes.length)]
 
           putComputerAt(randomIndex)
         }, 1500)
