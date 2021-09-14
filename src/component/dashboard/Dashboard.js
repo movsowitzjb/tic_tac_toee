@@ -17,6 +17,14 @@ const Dashboard = () => {
       setError('Failed to log out')
     }
   }
+
+  const xScore = localStorage.getItem('xScores')
+  const oScore = localStorage.getItem('oScore')
+  const draws = localStorage.getItem('draw')
+  const resetHandler = () => {
+    localStorage.clear()
+  }
+
   return (
     <Card>
       <Card.Body>
@@ -31,6 +39,20 @@ const Dashboard = () => {
         <br />
         <Link to="/game" className="btn btn-primary w-50 mt-3">
           Play Tic Tac Toe
+        </Link>
+        <br />
+        <div className="btn btn-success w-20 mt-3">X wins: {xScore}</div>
+        <br />
+        <div className="btn btn-warning w-20 mt-3">Draws: {draws}</div>
+        <br />
+        <div className="btn btn-danger w-20 mt-3">O Wins: {oScore}</div>
+        <br />
+        <Link
+          to="/game"
+          className="btn btn-primary w-20 mt-3"
+          onClick={resetHandler}
+        >
+          Reset Scores
         </Link>
         <br />
         <Button variant="link" onClick={handelLogout}>

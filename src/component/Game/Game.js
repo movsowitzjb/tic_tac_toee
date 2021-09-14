@@ -12,6 +12,9 @@ const Game = () => {
 
   const nextSymbol = isNext ? 'X' : 'O'
   const winner = calculateWinner(squares)
+  let xScores = []
+  let oScore = []
+  let draw = []
 
   useEffect(
     (i) => {
@@ -66,9 +69,17 @@ const Game = () => {
   }
 
   const getStatus = () => {
-    if (winner) {
+    if (winner === 'X') {
+      xScores.push(Number(JSON.parse(localStorage.getItem('xScores'))))
+      localStorage.setItem('xScores', JSON.stringify(++xScores))
+      return 'Winner:' + winner
+    } else if (winner === 'O') {
+      oScore.push(Number(JSON.parse(localStorage.getItem('oScore'))))
+      localStorage.setItem('oScore', JSON.stringify(++oScore))
       return 'Winner:' + winner
     } else if (isBoardFull(squares)) {
+      draw.push(Number(JSON.parse(localStorage.getItem('draw'))))
+      localStorage.setItem('draw', JSON.stringify(++draw))
       return 'Draw'
     } else {
       return 'Next Player:' + nextSymbol
@@ -96,9 +107,7 @@ const Game = () => {
           </div>
         </div>
         <div className="game-info">{getStatus()}</div>
-
         <div className="restart-button">{renderRestartButton()}</div>
-
         <div className="w-100 text-center mt-2">
           <Link to="/">Dashboard</Link>
         </div>
